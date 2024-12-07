@@ -19,6 +19,17 @@
                 "summary": "Daftar produk",
                 "description": "Mengambil semua data produk.",
                 "operationId": "c1ff6f862214e1896c59cfe0491ce0e8",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Nama produk untuk pencarian",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Daftar produk berhasil diambil"

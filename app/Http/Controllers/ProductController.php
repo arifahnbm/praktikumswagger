@@ -26,15 +26,28 @@ class ProductController extends Controller
      *     path="/products",
      *     summary="Daftar produk",
      *     description="Mengambil semua data produk.",
+     * @OA\Parameter(
+     *  name="name",
+     * in="query",
+     * description="Nama produk untuk pencarian",
+     * required=false,
+     * @OA\Schema(type="string")
+     * ),
      *     @OA\Response(
      *         response=200,
      *         description="Daftar produk berhasil diambil"
      *     )
      * )
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::all();
+        $query = Product::query();
+
+        if ($request->has('name')) {
+            $query->where('name', 'like', '%'. $request->input('name') . '%');
+        }
+
+        $products = $query->get();
         return response()->json($products, 200);
     }
 
